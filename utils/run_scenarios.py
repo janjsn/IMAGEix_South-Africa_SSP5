@@ -6,8 +6,9 @@ from itertools import product
 def run_scenarios(model, baseline, database, shale_costs, carbon_costs):
     # launch a platform to access the database
     mp = ixmp.Platform(dbprops=f'db/{database}', dbtype='HSQLDB')
-    base = message_ix.Scenario(mp, model=model, scenario=baseline)
-    base.solve(model='MESSAGE-MACRO')
+    base = message_ix.Scenario(mp, model=model, scenario=baseline) #Creates scenario
+    
+    base.solve(model='MESSAGE-MACRO') #Calls GAMS
     
     # Define values for progress report
     num = len(list(product(shale_costs, carbon_costs)))
